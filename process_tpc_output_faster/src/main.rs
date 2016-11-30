@@ -48,6 +48,9 @@ fn read_ten_obs() {
 	let mut rdr = csv::Reader::from_file(&path).unwrap();
     // what i have is a vector or array for a sinlge row of 727?! floating point elements.
     let rows = rdr.decode().collect::<csv::Result<Vec<InRecord>>>().unwrap();
+    // the line below gets just the first column 
+    //let col1 = rdr.decode().collect::<csv::Result<Vec<f32>>>().unrwap();
+    // println! ("data for first col is {:?}", col1);
     println!("data is {:?}", rows[0]);
     println!("first data element {}", rows[0].row_vec[0]);
 }

@@ -1,0 +1,7 @@
+[package]
+name = "proj_euler"
+version = "0.1.0"
+authors = ["Jessica <jkelly@urban.org>"]
+
+[dependencies]
+getopts = "0.2"

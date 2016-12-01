@@ -2,16 +2,20 @@
 #![allow(dead_code)]
 #![allow(unused_variables)] 
 //mod full_extract;
-use std::path::Path;
+
+
 extern crate csv;
 extern crate rustc_serialize;
+extern crate time;
 
+use std::path::Path;
+use time::PreciseTime;
 
 
 fn main() {
   //read_full();
-  read_ten_obs();
-  //read_full_vec();
+  //read_ten_obs();
+  read_full_vec();
 }
 
 
@@ -34,6 +38,10 @@ fn read_full() {
 #[derive(RustcDecodable, Debug)]
 struct InRecord {
     row_vec: Vec<f32>,
+}
+#[derive(RustcDecodable, Debug)]
+struct InBinRecord {
+    row_vec: Vec<u8>,
 }
 
 // do a read of a small 10 observation sample
@@ -58,12 +66,46 @@ fn read_ten_obs() {
 // reads the full file (and with a header added by hand)
 // using the same method as read_ten_obs above.
 // taking over 2 minutes so it's not a winner either for this much data
+// but i forgot that it was in debug mode. release mode finishes in under 1 minute
+// SO. Still some work to do, but all is not lost.
 fn read_full_vec(){
 	let path = Path::new("/Users/jkelly/projects/data/tabexp_2.csv");
 	let mut rdr = csv::Reader::from_file(&path).unwrap();
-    // what i have is a vector or array for a sinlge row of 727?! floating point elements.
-    let rows = rdr.decode().collect::<csv::Result<Vec<InRecord>>>().unwrap();
-    println!("data is {:?}", rows[0]);
-    println!("first data element {}", rows[0].row_vec[0]);
 
+	let start_vec = PreciseTime::now();
+
+    // what i have is a vector or array for a sinlge row of 727?! floating point elements.
+    let mut rows = rdr.decode().collect::<csv::Result<Vec<InRecord>>>().unwrap();
+    //println!("data is {:?}", rows[0]);
+    //println!("first data element {}", rows[0].row_vec[0]);
+
+	let end_vec = PreciseTime::now();
+	println!("{} seconds for reading in entire file into vector.", start_vec.to(end_vec));
+	// note this is still too long for me to be happy about it.
+
+	let start_loop = PreciseTime::now();
+	let mut i = 0;
+	let mut test_calc = vec![];
+    for row in rows.iter_mut() {
+    	let a = row.row_vec[130] * 25.6;
+    	test_calc.push(a);
+        
+	    i += 1;
+	    match i%10000 {
+	    	0 => println!("looped over {} records. test_calc = {} ",i,a),
+	    	_ => i=i, // default condition .need something here, point is to do nothing.
+	    };
+    }
+	let end_loop = PreciseTime::now();
+	println!("{} seconds for looping over vector.", start_loop.to(end_loop));
 }
+
+// Try reading binary
+// need to know how many bytes are in a record and how many variables there are. 
+// if there are 727 variables at 8 bytes each thats 5816 bytes per record
+
+fn read_binary_vec() {
+	//let path = Path::new("/Users/jkelly/projects/data/binary_file.rb8");
+	
+}
+

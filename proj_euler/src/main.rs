@@ -58,6 +58,12 @@ fn solve_problem(opt: Option<String>) {
     else if opt_val == "2" {
     	problem_2();
     }
+    else if opt_val == "3" {
+    	problem_3();
+    }
+    else if opt_val == "4" {
+    	problem_4();
+    }
     else {
     	println!("not solved yet");
     }   
@@ -69,7 +75,7 @@ fn problem_1() {
 	let mut sum = 0;
 	for num in 1..1000 {
 		// match on number mod 3 and number mod 5 is 0.
-		match (num%3, num%5) {
+		match (num % 3, num % 5) {
 			  (0,0) => sum += num,
 			  (0,_) => sum += num,
 			  (_,0) => sum += num,
@@ -130,7 +136,7 @@ fn problem_2() {
     loop {
     	fib.next();
     	if fib.curr <= limit {
-    		match fib.curr%2{
+    		match fib.curr % 2{
     			0 => fib_vec.push(fib.curr),
     			_ => fib.curr = fib.curr,
     		}
@@ -147,4 +153,51 @@ fn problem_2() {
 	println!("SOLUTION: The sum is {}", sum)
 }
 
+// Remarks: Doing it first how I would think about it and solve.
+fn problem_3() {
+	println!("PROBLEM: What is the largest prime factor of the number 600851475143?");
+	// find the upper limit of what number to look for;
+	// this all needs to be a function that returns a number to be added to the
+	// vector so that we can call it not just for the main number, but for each factor 
+	// as well because we need to know if they are prime.
+	// so two functions factor_number(int)->vec <int> and is_prime(int) -> bool
+	// trying to combine into one function that calls itself could become a recursive
+	// nightmare. so going for clear over short. 
 
+	fn factor_number(num: i64) -> Vec<i64> {
+		let upper_lim = (num as f64).sqrt() as i64 + 1;
+		let mut factors: Vec<i64> = Vec::new();
+
+		for i in 2..upper_lim{
+			if num % i == 0 {
+				factors.push(i);
+			}
+		}
+		return factors;
+	}
+
+    let val: i64 = 600851475143;
+	
+	let val_factors = factor_number(val);
+	println!("Factors from function are: {:?}", val_factors);
+
+	let mut prime_factors: Vec<i64> = Vec::new();
+	for val in &val_factors {
+		let factor_of_factor = factor_number(*val);
+		println!("Factors of {} are {:?}",val,factor_of_factor);
+		if factor_of_factor.len() == 0{
+			prime_factors.push(*val);
+		}
+	}
+	
+	println!("Prime factors are: {:?}", prime_factors);
+	// no need to sort because we know the last element is going to be the largest
+	// based on our looping!
+	println!("SOLUTION: Largest prime factor is: {:?}", prime_factors.last());
+}
+
+fn problem_4(){
+	println!("PROBLEM: ");
+
+	println!("SOLUTION: ");
+}

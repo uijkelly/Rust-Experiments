@@ -64,6 +64,15 @@ fn solve_problem(opt: Option<String>) {
     else if opt_val == "4" {
     	problem_4();
     }
+    else if opt_val == "5" {
+    	problem_5();
+    }
+    else if opt_val == "6" {
+    	problem_6();
+    }
+    else if opt_val == "7" {
+    	problem_7();
+    }
     else {
     	println!("not solved yet");
     }   
@@ -239,4 +248,74 @@ fn problem_4() {
 	}	
 }
 
+// Remarks: Trying blindly and hope we don't get into an infinite loop!
+//  It is not the fastest, but it does run. 
+fn problem_5() {
+	println!("PROBLEM What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?");
+	let mut num = 20; // start at 20, because it can't be any smaller than that!
+	loop {
+		let mut count = 0;
+		for i in 1..21 {
+			if num % i == 0 { count = count + 1; } 
+		}
+		if count == 20 {
+			println!("SOLUTION: The number is {}", num);
+			break;
+		}
+		num += 20; // incrementing by 20 instead of 1 because we know if must be divisible by 20. 
 
+	}
+}
+
+// Remarks: Could we reduce the number of lines?
+fn problem_6() {
+
+	println!("PROBLEM: Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.");
+	// The sum of the squares of the first ten natural numbers is, 1^2 + 2^2 + ... + 10^2 = 385 (sum_sq)
+	// The square of the sum of the first ten natural numbers is, (1 + 2 + ... + 10)^2 = 55^2 = 3025 (sum_nat_sq)
+	// Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 - 385 = 2640.
+	
+	// use mapping, and then a collect and fold.
+	let natural = (1..101).collect::<Vec<i32>>();
+	let sum_nat = natural.iter().fold(0, |acc, &x| acc + x);
+	let sum_nat_sq = sum_nat.pow(2);
+	let natural_sq: Vec<i32> = natural.into_iter().map(|x| x.pow(2)).collect(); // transform the natural vector into another vector
+	//println!("{:?}", natural_sq );
+	let sum_sq = natural_sq.iter().fold(0, |acc, &x| acc + x);
+	println!("SOLUTION: sum_nat_sq {} - sum_sq {} = {}", sum_nat_sq, sum_sq, sum_nat_sq - sum_sq);
+}
+
+// Remarks: Remember your Abstract Algebra?
+//   but until i dig that up, use the factor_number function from above.
+//   copied here because it's local to that function and i want each function to
+//   be self-contained.
+// Note: This is pretty fast so won't worry about anything else if i don't have to!
+fn problem_7 () {
+	println!("PROBLEM: What is the 10,001st prime number?");
+	let mut primes = vec![];
+	fn factor_number(num: i64) -> Vec<i64> {
+		let upper_lim = (num as f64).sqrt() as i64 + 1;
+		let mut factors: Vec<i64> = Vec::new();
+
+		for i in 2..upper_lim {
+			if num % i == 0 {
+				factors.push(i);
+			}
+		}
+		return factors;
+	}
+
+	let mut i = 2;
+	loop {
+		let factors = factor_number(i);
+		if factors.len() == 0 { primes.push(i);}
+		if primes.len() == 10001 {
+			println!("SOLUTION: {:?}", primes.last());
+			break;
+		}
+		i = i+1;
+	}
+
+	
+	
+}

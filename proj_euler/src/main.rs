@@ -196,8 +196,47 @@ fn problem_3() {
 	println!("SOLUTION: Largest prime factor is: {:?}", prime_factors.last());
 }
 
-fn problem_4(){
-	println!("PROBLEM: ");
+// Remarks: A palindromic number reads the same both ways. The largest palindrome 
+//  made from the product of two 2-digit numbers is 9009 = 91 * 99.
+//
+//  Working in the 900s first, to see if we find a palindromic number. Perhaps a non-general
+//  solution, but it will work. the looping over in a loop again, gets tricky.
+fn problem_4() {
+	println!("PROBLEM: Find the largest palindrome made from the product of two 3-digit numbers.");
+	// strategy is to start with 999 * 999, then 999 * 998 etc until we find the FIRST 
+	// number that is a palindrome. Will need a function that checks if a number is a palindrome
 
-	println!("SOLUTION: ");
+	// Description: convert number to string, get the characters, reverse them then collect back to string.
+	//  check if orig and reversed are equivalent
+	fn is_palindrome(num: i64) -> bool {
+		let rev_str = num.to_string().chars().rev().collect::<String>();
+		let is = if num.to_string() == rev_str { true } else { false };
+		return is;
+	}
+
+	// checking that the function works as expected
+	println!("is 919 a palindrome? answer is {:?}", is_palindrome(919) );
+	println!("is 8843 a palindrome? answer is {:?}", is_palindrome(8843) );
+
+	// note that the last number 1000 is not included in the range, but the 900 is.
+	// create array of numbers twice (?)
+	let x_vec = (900..1000).rev().collect::<Vec<i64>>();
+	// println!("x is {:?}",x );
+	// loop over x and multiply 
+	let mut found = false;
+	for y in (900..1000).rev() {
+		if !found {
+			for x in &x_vec {
+				let product = x * y;
+				//println!("x is {}, y is {}, product is {}",x,y,product);
+				if is_palindrome(product) {
+					println!("SOLUTION: x is {}, y is {}, and the product is : {}", x, y, product);
+					found = true; // so we break out of outer loop as well.
+					break;
+				}
+			}
+		}
+	}	
 }
+
+

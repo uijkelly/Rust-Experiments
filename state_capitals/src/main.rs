@@ -15,7 +15,7 @@ extern crate rand;
 
 use std::io;
 use std::path::Path;
-use rand::Rng;
+use rand::{thread_rng, Rng};
 
 #[derive(RustcDecodable, Debug)]
 	struct AnswerRecord {
@@ -69,7 +69,10 @@ fn main() {
 
 	// 1. State Capitals only
 	if option == 1 { 
-		do_state_capitals(&state_answer_records);
+		do_state_capitals(&state_answer_records, &player);
+	}
+	else {
+		println!("Not ready yet, try again soon.")
 	}
 
 	// 2. State Abbrev. only
@@ -98,7 +101,7 @@ fn is_player_right(input_string: &str, answer_string: &str) -> bool {
 // Description: Randomly pick an id and ask for user to input the Capital. Check the answer,
 //  count correct answers, and number of guesses to get to the answer.
 //  after 5 incorrect answers, ask if user wants to skip (and be told the answer)
-fn do_state_capitals(state_answer_records: &Vec<AnswerRecord>) {
+fn do_state_capitals(state_answer_records: &Vec<AnswerRecord>, player: &String) {
 	// perhaps put in a record type for tracking? since they will be the 
 	// same across functions
 	let mut num_correct = 0; 		// total number of correct answers
@@ -106,20 +109,17 @@ fn do_state_capitals(state_answer_records: &Vec<AnswerRecord>) {
 	let mut num_skip = 0;			// total number of skips
 	// keep this outside of whatever record type we decide on
 	let mut num_guess_this = 0;		// total number of guesses this question
-	//will also need to track the ids that we've gone through so we don't guess it again.
-	let mut states = (0..50).collect::<Vec<u32>>();
-	//println!("states {:?}", states);
-	//println!("can I access answer records? {:?}", state_answer_records[0]);
+	
+	// generate a random ordering of the numbers 0-50 to use as our indices for the state_answer_records
+	let mut rng = thread_rng();
+	let mut rnd_states = (0..50).collect::<Vec<usize>>(); // collect the numbers into a vector
+	rng.shuffle(&mut rnd_states);	// and randomly shuffle them
+    
 
-// TODO, we will need a loop over all the states.
-// i'm thinking before we get here, we randomly sort the states to generate the order first
-// instead of always checking to see if we've gotten to this state before.
-// that means if we skip a state, we won't go back to it.
+    for s in 0..50 {
+    	let state_id = rnd_states[s];
+		println!("What is the capital of {}?", state_answer_records[state_id].state);		
 
-    //for s in (0..50) {
-		let mut state_id = rand::thread_rng().gen_range(1,50);
-
-		println!("What is the capital of {}?", state_answer_records[state_id].state);
 		loop { // loop for guessing the answer of one
 			let mut guess = String::new();
 		    io::stdin().read_line(&mut guess).expect("Failed to read guess");
@@ -131,7 +131,9 @@ fn do_state_capitals(state_answer_records: &Vec<AnswerRecord>) {
 
 		    if check == true {
 		    	println!("YOU'RE RIGHT!");
+		    	num_guess_this = 0;
 		    	num_correct += 1;
+		    	num_guess_tot += 1;
 		    	break;
 		    }
 		    else {
@@ -144,13 +146,29 @@ fn do_state_capitals(state_answer_records: &Vec<AnswerRecord>) {
 		    	println!("Do you want to skip this state? [Y or N]");
 		    	let mut skip = String::new();
 		    	io::stdin().read_line(&mut skip).expect("Failed to read skip");
-		    	match skip.trim() {
-		    		"Y" => break,
-		    		_ => println!("Guess again, brave soul!"),
-		    	};
+		    	if skip.trim() == "Y" {
+		    		num_guess_this = 0;
+		    		num_skip += 1;
+		    		break;
+		    	}
+		    	else {
+		    		println!("Guess again, {}", player.trim());
+		    	}
+		    	
 		    }
 		}//end guess one answer loop.
-	//}// end loop over states
+
+
+	}// end loop over states
+
+	println!("Final Results for {}", player.trim());
+	println!("You got {} right and made {} bad guesses and skipped {} states",num_correct, num_guess_tot-num_correct, num_skip );
+	if num_correct == 50 && num_guess_tot == 50 && num_skip == 0 {
+		println!("!!!! HOORAY !!!!!");
+		println!("A PERFECT GAME");
+		println!("THREE CHEERS FOR {}",player.trim() );
+	}
+
 }
 
 

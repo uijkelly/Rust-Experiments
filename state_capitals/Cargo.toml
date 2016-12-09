@@ -1,0 +1,9 @@
+[package]
+name = "state_capitals"
+version = "0.1.0"
+authors = ["Jessica Kelly<jannekelly79@gmail.com>"]
+
+[dependencies]
+csv="0.14"
+rustc-serialize = "0.3"
+rand="0.3.0"

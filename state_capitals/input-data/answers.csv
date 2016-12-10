@@ -1,0 +1,51 @@
+id,State,Abbreviation,Capital,LargestCity
+1,Alabama,AL,Montgomery,Birmingham
+2,Alaska,AK,Juneau,Anchorage
+3,Arizona,AZ,Phoenix,Phoenix
+4,Arkansas,AR,Little Rock,Little Rock
+5,California,CA,Sacramento,Los Angeles
+6,Colorado,CO,Denver,Denver
+7,Connecticut,CT,Hartford,Bridgeport
+8,Delaware,DE,Dover,Wilmington
+9,Florida,FL,Tallahassee,Jacksonville
+10,Georgia,GA,Atlanta,Atlanta
+11,Hawaii,HI,Honolulu,Honolulu
+12,Idaho,ID,Boise,Boise
+13,Illinois,IL,Springfield,Chicago
+14,Indiana,IN,Indianapolis,Indianapolis
+15,Iowa,IA,Des Moines,Des Moines
+16,Kansas,KS,Topeka,Wichita
+17,Kentucky,KY,Frankfort,Louisville
+18,Louisiana,LA,Baton Rouge,New Orleans
+19,Maine,ME,Augusta,Portland
+20,Maryland,MD,Annapolis,Baltimore
+21,Massachusetts,MA,Boston,Boston
+22,Michigan,MI,Lansing,Detroit
+23,Minnesota,MN,Saint Paul,Minneapolis
+24,Mississippi,MS,Jackson,Jackson
+25,Missouri,MO,Jefferson City,Kansas City
+26,Montana,MT,Helena,Billings
+27,Nebraska,NE,Lincoln,Omaha
+28,Nevada,NV,Carson City,Las Vegas
+29,New Hampshire,NH,Concord,Manchester
+30,New Jersey,NJ,Trenton,Newark
+31,New Mexico,NM,Santa Fe,Albuquerque
+32,New York,NY,Albany,New York City
+33,North Carolina,NC,Raleigh,Charlotte
+34,North Dakota,ND,Bismarck,Fargo
+35,Ohio,OH,Columbus,Columbus
+36,Oklahoma,OK,Oklahoma City,Oklahoma City
+37,Oregon,OR,Salem,Portland
+38,Pennsylvania,PA,Harrisburg,Philadelphia
+39,Rhode Island,RI,Providence,Providence
+40,South Carolina,SC,Columbia,Columbia
+41,South Dakota,SD,Pierre,Sioux Falls
+42,Tennessee,TN,Nashville,Memphis
+43,Texas,TX,Austin,Houston
+44,Utah,UT,Salt Lake City,Salt Lake City
+45,Vermont,VT,Montpelier,Burlington
+46,Virginia,VA,Richmond,Virginia Beach
+47,Washington,WA,Olympia,Seattle
+48,West Virginia,WV,Charleston,Charleston
+49,Wisconsin,WI,Madison,Milwaukee
+50,Wyoming,WY,Cheyenne,Cheyenne

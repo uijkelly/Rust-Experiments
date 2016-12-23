@@ -1,0 +1,18 @@
+{
+	"TITLE": [
+		"Current Law",
+		"Baseline"
+	],
+	"YEARSIM": [
+		2016,
+		2016
+	],
+	"MRATES": [
+		".FALSE.",
+		".FALSE."
+	],
+	"CPI_CY": [
+		236.7489,
+		236.7489
+	]
+}

@@ -46,8 +46,8 @@ struct OutRecord {
 ///
 fn main() {
     // Create a path to the desired file
-    let path = Path::new("/Users/jkelly/projects/read_csv/src/sample_data.csv");
-    let outp = Path::new("/Users/jkelly/projects/read_csv/src/output_data.csv");
+    let path = Path::new("/Users/jkelly/projects/rust/read_csv/src/sample_data.csv");
+    let outp = Path::new("/Users/jkelly/projects/rust/read_csv/src/output_data.csv");
 
     // set up the reader
     let mut rdr = csv::Reader::from_file(&path).unwrap();

@@ -1,0 +1,33 @@
+{ 
+    "Records": [
+        {
+            "FirstName": "John",
+            "LastName": "Doe",
+            "Age": 43,
+            "Address": {
+                "Street": "100 Main Street",
+                "City": "Springfield",
+                "State": "Illinois"
+            },
+            "PhoneNumbers": [
+                "123-555-5555",
+                "456-555-7777"
+            ]
+        },
+
+        {
+            "FirstName": "Jane",
+            "LastName": "Smith",
+            "Age": 19,
+            "Address": {
+                "Street": "200 2nd Ave",
+                "City": "Baltimore",
+                "State": "Maryland"
+            },
+            "PhoneNumbers": [
+                "410-444-3333",
+                "301-333-2543"
+            ]
+        }
+    ]
+}

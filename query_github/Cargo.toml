@@ -1,0 +1,9 @@
+[package]
+name = "query_github"
+version = "0.1.0"
+authors = ["Jessica Kelly<jkelly@urban.org>"]
+
+[dependencies]
+csv="0.14"
+rustc-serialize = "0.3"
+github = "0.1.2"

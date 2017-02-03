@@ -6,4 +6,4 @@ authors = ["Jessica Kelly<jkelly@urban.org>"]
 [dependencies]
 csv="0.14"
 rustc-serialize = "0.3"
-github = "0.1.2"
+curl = "0.4.4"

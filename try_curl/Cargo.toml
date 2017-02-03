@@ -1,0 +1,7 @@
+[package]
+name = "try_curl"
+version = "0.1.0"
+authors = ["Jessica <jkelly@urban.org>"]
+
+[dependencies]
+curl = "0.4.4"

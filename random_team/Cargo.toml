@@ -1,0 +1,7 @@
+[package]
+name = "random_team"
+version = "0.1.0"
+authors = ["Jessica <jkelly@urban.org>"]
+
+[dependencies]
+rand = "0.3.18"
